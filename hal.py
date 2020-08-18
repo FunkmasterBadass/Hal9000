@@ -19,20 +19,21 @@ async def flip(ctx):
         await ctx.send(file=discord.File('Tails.png'))
 
 @bot.command()
-async def roll(ctx, dice: str):
+async def roll(ctx, *dice_str: str):
     """Rolls a dice in NdN format."""
-    try:
-        rolls, limit = map(int, dice.split('d'))
-    except Exception:
-        await ctx.send('Format has to be in NdN!')
-        return
     result = ''
-    for r in range(rolls):
-        num = randint(1, limit)
-        if limit == 10:
-            num = (num - 1) * 10
-            num = '00' if num == 0 else f'{num}'
-        result = f'{result}, {num}' if r > 0 else f'{num}'
+    for dice in dice_str:
+        try:
+            rolls, limit = map(int, dice.split('d'))
+        except Exception:
+            await ctx.send('Format has to be in NdN!')
+            return
+        for r in range(rolls):
+            num = randint(1, limit)
+            if limit == 10:
+                num = (num - 1) * 10
+                num = '00' if num == 0 else f'{num}'
+            result = f'{result}, {num}' if result else f'{num}'
     await ctx.send(f"{ctx.author.mention} rolled {result}!")
 
 @bot.command()
