@@ -198,5 +198,6 @@ async def recipe(ctx, *item_name: str):
         await ctx.send(f"No recipe found for {name}.")
     await ctx.send(message)
 
-
-bot.run('token')
+with open('token.txt') as f:
+    token = f.read()
+bot.run(token)
