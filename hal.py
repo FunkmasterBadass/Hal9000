@@ -26,7 +26,7 @@ async def roll(ctx, *dice_str: str):
         try:
             rolls, limit = map(int, dice.split('d'))
         except Exception:
-            await ctx.send('Format has to be in NdN!')
+            await ctx.send('Format has to be in NdN (NdN ...)!')
             return
         for r in range(rolls):
             num = randint(1, limit)
