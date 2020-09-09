@@ -30,11 +30,23 @@ async def roll(ctx, *dice_str: str):
             return
         for r in range(rolls):
             num = randint(1, limit)
-            if limit == 10:
-                num = (num - 1) * 10
-                num = '00' if num == 0 else f'{num}'
             result = f'{result}, {num}' if result else f'{num}'
     await ctx.send(f"{ctx.author.mention} rolled {result}!")
+
+@bot.command()
+async def percent(ctx, quantity: int):
+    """Rolls a special d10 dice, specify quantity."""
+    try:
+        result = ''
+        for r in range(quantity):
+            num = (randint(1, 10) - 1) * 10
+            num = '00' if num == 0 else f'{num}'
+            result = f'{result}, {num}' if result else f'{num}'
+        await ctx.send(f"{ctx.author.mention} rolled {result}!")
+    except Exception as e:
+        print(e)
+        await ctx.send(f"{ctx.author.mention} please specify the number of d10s to roll")
+
 
 @bot.command()
 @commands.has_role('Admin')
