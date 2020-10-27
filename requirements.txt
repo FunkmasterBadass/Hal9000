@@ -2,3 +2,4 @@ discord.py[voice]
 PyNaCl
 fuzzywuzzy
 python-Levenshtein
+pyOpenSSL==19.1.0
